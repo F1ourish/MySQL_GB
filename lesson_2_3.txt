@@ -1,0 +1,71 @@
+		Задание 3.
+		
+	Создайте дамп базы данных example из предыдущего задания, разверните содержимое дампа в новую базу данных sample.
+	
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump example > C:\Users\novog\OneDrive\Documents\mysql_dump\example_1708.sql			## запуск плагина mysqldump для БД example и направление вывода в новый файл example_1708.sql
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>cd C:\Users\novog\OneDrive\Documents\mysql_dump												## переходим в директорию с дампами и проверяем, что файл создался
+
+C:\Users\novog\OneDrive\Documents\mysql_dump>dir
+ Том в устройстве C не имеет метки.
+ Серийный номер тома: 88A9-9623
+
+ Содержимое папки C:\Users\novog\OneDrive\Documents\mysql_dump
+
+17.08.2021  15:42    <DIR>          .
+17.08.2021  15:42    <DIR>          ..
+17.08.2021  15:42             1 946 example_1708.sql																					## вот он
+16.08.2021  13:11             1 988 test1_1608.sql
+               2 файлов          3 934 байт
+               2 папок  63 164 252 160 байт свободно
+
+C:\Users\novog\OneDrive\Documents\mysql_dump>cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql																						## возвращаемся в mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 45
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE sample;																											## создаём БД sample
+Query OK, 1 row affected (0.00 sec)
+
+mysql> \q																																## выходим
+Bye
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql sample < C:\Users\novog\OneDrive\Documents\mysql_dump\example_1708.sql				## и выгружаем дамп в только что созданную БД
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql																						## возвращаемся в mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 47
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE sample;																														## переключаемся на БД sample
+Database changed
+mysql> SELECT * FROM users;																												## выгружаем содержимое таблицы users
++------+-------+
+| id   | name  |
++------+-------+
+|    1 | test1 |
+|    2 | test2 |
+|    3 | test3 |
+|    4 | test4 |
++------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
