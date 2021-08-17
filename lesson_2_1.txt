@@ -1,0 +1,29 @@
+		Задание 1.
+	Собственно, тут ничего сложного, создаём файл конфига с именем *my.cnf, сохраняем его в одной из корневых директорий 
+пришлось немного почитать документацию), например, я сохранил в C:\Program Files\MySQL\MySQL Server 8.0\my.cnf, в 
+результате чего запуск mysql сразу происходит под пользователем root с паролем, указанным в файле конфига.
+		
+	Сам файл (указал клиент в скобках, чтобы запускать и другие плагины без ввода логина/пароля):
+		
+[client]
+user=root
+password=*********
+	
+	Как это происходит через cmd (windows):
+		
+C:\Users\novog>cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 43
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>

@@ -1,0 +1,43 @@
+		Задание 4*.
+		
+	Ознакомьтесь более подробно с документацией утилиты mysqldump. Создайте дамп единственной таблицы help_keyword базы данных mysql.
+Причем добейтесь того, чтобы дамп содержал только первые 100 строк таблицы.
+
+	C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump --where="true limit 100" mysql help_keyword > C:\Users\novog\OneDrive\Documents\mysql_dump\help_keyword_1708.sql
+	
+	--where (-w) позвляет задавать условие, в данном случае лимит в 100 строк вывода, далее указывается БД из которой делается дамп (mysql), т.к. нам нужна конкретная таблица 
+	далее указывается её имя (help_keyword), далее по стандарту полный путь до файла дампа
+	
+	единственное, не получилось для проверки вывести эти данные в таблицу из дампа, получаю ошибку:
+	
+mysql> CREATE DATABASE ddump;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> \q
+Bye
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql ddump < C:\Users\novog\OneDrive\Documents\mysql_dump\help_keyword_1708.sql
+ERROR 3723 (HY000) at line 25: The table 'help_keyword' may not be created in the reserved tablespace 'mysql'.
+
+	да и в целом найти данную таблицу (help_keyword) в папке mysql не удалось, её там нету, судя по всему из-за этого данная ошибка и появляется...
+	
+C:\Program Files\MySQL\MySQL Server 8.0\bin>cd C:\ProgramData\MySQL\MySQL Server 8.0\Data\mysql
+
+C:\ProgramData\MySQL\MySQL Server 8.0\Data\mysql>dir
+ Том в устройстве C не имеет метки.
+ Серийный номер тома: 88A9-9623
+
+ Содержимое папки C:\ProgramData\MySQL\MySQL Server 8.0\Data\mysql
+
+16.08.2021  12:38    <DIR>          .
+16.08.2021  12:38    <DIR>          ..
+16.08.2021  12:38                35 general_log.CSM
+16.08.2021  12:38                 0 general_log.CSV
+16.08.2021  12:38             5 972 general_log_213.sdi
+16.08.2021  12:38                35 slow_log.CSM
+16.08.2021  12:38                 0 slow_log.CSV
+16.08.2021  12:38            12 505 slow_log_214.sdi
+               6 файлов         18 547 байт
+               2 папок  63 164 018 688 байт свободно
+
+C:\ProgramData\MySQL\MySQL Server 8.0\Data\mysql>

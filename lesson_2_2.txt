@@ -1,0 +1,83 @@
+		Задание 2.
+	
+	Создайте базу данных example, разместите в ней таблицу users, состоящую из двух столбцов, числового id и строкового name.
+	
+C:\Users\novog>cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 43
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE example; 																	## создаём БД
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW DATABASES;																				## проверяем, что она появилась, выводя список всех БД в каталоге
++--------------------+
+| Database           |
++--------------------+
+| example            |
+| information_schema |
+| lesson2_test       |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| test1              |
+| test2              |
+| world              |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;																					## БД пустая
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE users(id INT, name VARCHAR(100));												## создаём таблицу users с 2мя столбцами id (целочисленное) и name (строка до 100 симв.)
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW TABLES;																					## проверяем, что таблица создалась
++-------------------+
+| Tables_in_example |
++-------------------+
+| users             |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM users;																			## в таблице нет данных
+Empty set (0.00 sec)
+
+mysql> INSERT users (id, name) VALUES (1, 'test1');													## добавляем данные в таблицу (в столбец id - 1, в name - test1)
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM users;																			## снова проверяем таблицу, появилась новая строка
++------+-------+
+| id   | name  |
++------+-------+
+|    1 | test1 |
++------+-------+
+1 row in set (0.00 sec)
+
+mysql> INSERT users (id, name) VALUES (2, 'test2'), (3, 'test3'), (4, 'test4');						## добавляем ещё несколько значений
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM users;																			## снова проверяем
++------+-------+
+| id   | name  |
++------+-------+
+|    1 | test1 |
+|    2 | test2 |
+|    3 | test3 |
+|    4 | test4 |
++------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
